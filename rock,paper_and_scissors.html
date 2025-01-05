@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(232, 232, 29);
+        }
+        .container{
+            width: 230px;
+            height: 300px;
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.449), 5px 5px 10px rgba(0, 0, 0, 0.273);
+        }
+        .moves{
+            display: flex;
+            justify-content: space-around;
+            width: 200px;
+            aspect-ratio: 1/0.3;
+        }
+        .rock,.paper,.scissors{
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgb(240, 240, 240);
+            font-size: 20px;
+            box-shadow: 4px 4px 0px rgb(98, 97, 97),-1px -1px 2px rgb(228, 228, 228);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+.rock:active,.paper:active,.scissors:active{
+    transform: translateX(4px) translateY(4px);
+    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+    transition: all 0.2s;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <p>Rock Paper Scissors</p>
+    <div class="moves">
+    <div class="rock" onclick="playerTurn('Rock');">✊</div>
+    <div class="paper"  onclick="playerTurn('Paper');">🖐️</div>
+    <div class="scissors"  onclick="playerTurn('Scissors');">✌️</div>
+</div>
+    <button class="resetscore" onclick="score.wins=0; score.losses=0; score.ties=0;">Reset score</button>
+</div>
+    <script>
+        const score={
+            wins: 0,
+            losses:0,
+            ties:0
+        }
+                let computerMove='';
+                let result='';
+                function computerTurn(){
+                    const n=Math.random();
+        
+            if(n>=0 && n<=1/3){
+                computerMove='Rock';
+            }
+            else if(n>1/3 && n<=2/3){
+                computerMove='Paper';
+            }
+            else if(n>2/3 && n<=1){
+                computerMove='Scissors';
+            }
+            console.log(computerMove);
+                }
+                function playerTurn(playerMove){
+                    computerTurn();
+                    if(playerMove=== 'Rock'){
+                        if(computerMove=== 'Rock'){
+              result='Tie';
+            }
+            else if(computerMove=== 'Paper'){
+                result='You lose';
+            }
+            else if(computerMove==='Scissors'){
+                result='You win';
+            }
+                    }
+                    else if(playerMove==='Paper'){
+                        if(computerMove=== 'Rock'){
+                            result='You win';
+    }
+    else if(computerMove=== 'Paper'){
+        result='Tie';
+    }
+    else if(computerMove==='Scissors'){
+        result='You lose';
+    }
+                    }
+                    else if(playerMove==='Scissors'){
+                        if(computerMove=== 'Rock'){
+                            result='You lose';
+    }
+    else if(computerMove=== 'Paper'){
+        result='You win';
+    }
+    else if(computerMove==='Scissors'){
+        result='Tie';
+    }
+                
+         }
+         if(result==='You win'){
+             score.wins++;
+         }
+         else if(result==='You lose'){
+             score.losses++;
+         }
+         else if(result==='Tie'){
+             score.ties++;
+         }
+
+         alert(`You picked ${playerMove} computer picked ${computerMove}. ,${result}
+Wins: ${score.wins},Losses: ${score.losses},Ties: ${score.ties}`
+         );
+        }
+    </script>
+</body>
+</html>
